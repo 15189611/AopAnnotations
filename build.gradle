@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release' // 添加bintray插件
 
 
 android {
@@ -22,12 +23,34 @@ android {
         }
     }
 
+
 }
 
 dependencies {
-
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
+
+
+// 定义两个链接，下面会用到。
+def siteUrl = 'https://github.com/15189611/AopAnnotations' // 项目主页。
+def gitUrl = 'https://github.com/15189611/AopAnnotations.git' // Git仓库的url。
+// 项目引用的版本号
+version = "1.0.0"
+// 唯一包名，比如compile 'com.charles:annotations:1.0.0'中的com.charles就是这里配置的。
+group = "com.charles"
+
+publish{
+    userOrg = 'mcharles'//bintray.com用户名
+    repoName = 'myAnnotations'
+    groupId = group //jcenter上的路径
+    artifactId = 'myAnnotations'//  与jcenter 项目名称一致
+    publishVersion = version //版本号
+    desc = 'Oh hi, this is a nice description for a project, right?'//描述，不重要
+    website = siteUrl //网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
+}
+
+
+
